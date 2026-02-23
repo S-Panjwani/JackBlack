@@ -58,3 +58,9 @@ So the deck is statistically neutral at this moment.
 - Ace detection may be inconsistent in some frames.  
 - Designed specifically for **single-deck blackjack**; multi-deck counting logic is not implemented.  
 - Demo shows detection accuracy with cards: 5♠, 2♥, A♥, 10♥.
+
+---
+
+## Credits
+
+- Pretrained YOLOv8 model for card detection: [TeogopK/Playing-Cards-Object-Detection](https://github.com/TeogopK/Playing-Cards-Object-Detection)  
