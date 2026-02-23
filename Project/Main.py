@@ -15,12 +15,14 @@ model = YOLO(modelpath)
 
 # open camera (automatic windows choose index) depending on system
 camera = cv2.VideoCapture(cv2.CAP_DSHOW)
+cv2.namedWindow("Jackblack", cv2.WINDOW_AUTOSIZE)
 if not camera.isOpened():
     print("camera not working")
     exit()
 
 camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
 
 
 # running count state
@@ -36,7 +38,7 @@ while True:
     # yolo inference
     results = model.predict(
         frame,
-        imgsz=640, # how big compress image to
+        imgsz=800, # how big compress image to
         conf=0.5, # confidence threshold. model must be higher than 90% sure its the card to avoid miscount
         half=True,
         device=0,
