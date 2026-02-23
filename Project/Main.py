@@ -15,7 +15,7 @@ model = YOLO(modelpath)
 
 # open camera (automatic windows choose index) depending on system
 camera = cv2.VideoCapture(cv2.CAP_DSHOW)
-cv2.namedWindow("Jackblack", cv2.WINDOW_AUTOSIZE)
+cv2.namedWindow("Single-Deck BlackJack Card Counter", cv2.WINDOW_AUTOSIZE)
 if not camera.isOpened():
     print("camera not working")
     exit()
@@ -39,7 +39,7 @@ while True:
     results = model.predict(
         frame,
         imgsz=800, # how big compress image to
-        conf=0.5, # confidence threshold. model must be higher than 90% sure its the card to avoid miscount
+        conf=0.5, # confidence threshold. model must be higher than 50% sure its the card to avoid miscount
         half=True,
         device=0,
         verbose=False
@@ -87,13 +87,13 @@ while True:
         cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2
     )
 
-    cv2.imshow("Jackblack", frame)
+    cv2.imshow("Single-Deck BlackJack Card Counter", frame)
 
     # controls
     key = cv2.waitKey(1) & 0xFF
-    if key == ord('q'): # q to quit (close window)
+    if key == ord('q'): # lower-case q to quit (close window)
         break
-    elif key == ord('r'): # r to reset count (set back to 0. clears counted cards)
+    elif key == ord('r'): # lower-case r to reset count (set back to 0. clears counted cards)
         running_count = 0
         counted_cards.clear()
 
