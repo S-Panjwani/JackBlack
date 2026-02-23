@@ -1,23 +1,70 @@
 # Blackjack Card Counter
 
-This project is meant to become a real-time blackjack card counter using computer vision.
-
-It uses a pretrained YOLOv8 model to detect playing cards from a webcam feed.
+A real-time **blackjack card counter** that uses computer vision to detect cards and track a Hi-Lo running count for **single-deck blackjack**.
 
 ---
 
-## What It Is Now
+## Demo Snapshot
 
-Right now, the project only:
+The demo shows the system detecting four cards in real-time:
 
-- Detects playing cards in real time  
-- Draws bounding boxes and labels  
+- **5♠ (5 of Spades)**
+- **2♥ (2 of Hearts)**
+- **A♥ (Ace of Hearts)**
+- **10♥ (10 of Hearts)**
 
-There is no card counting logic yet.
+The YOLOv8 model draws bounding boxes around each card and labels them with the detected rank. The Ace detection is a little inconsistent, so sometimes it may misclassify or flicker in labeling.
+
+![Blackjack Card Counter Demo](Assets/D1.png)
 
 ---
 
-## Credits
+## How It Works
 
-Pretrained model from:  
-https://github.com/TeogopK/Playing-Cards-Object-Detection
+1. **Webcam Feed** – The system processes live frames from a camera.  
+2. **Card Detection** – YOLOv8 identifies each visible playing card.  
+3. **Classification** – Each card is recognized for its rank.  
+4. **Hi-Lo Mapping** – Ranks are converted into the Hi-Lo counting values:
+   - 2–6 → +1  
+   - 7–9 → 0  
+   - 10, J, Q, K, A → -1  
+5. **Running Count Update** – The system maintains a real-time running count.  
+6. **Duplicate Filtering** – Logic prevents counting the same card multiple times in the same frame.
+
+---
+
+## Hi-Lo Count Example (Demo Frame)
+
+For the demo frame cards:
+
+| Card | Hi-Lo Value |
+|------|-------------|
+| 5♠   | +1          |
+| 2♥   | +1          |
+| A♥   | -1          |
+| 10♥  | -1          |
+
+**Net Running Count:**  
+\[
++1 + 1 - 1 - 1 = 0
+\]
+
+So the deck is statistically neutral at this moment.
+
+---
+
+## Features
+
+- Real-time card detection and classification  
+- Bounding boxes and labels drawn on detected cards  
+- Hi-Lo running count system for single-deck blackjack  
+- Duplicate detection filtering to prevent double-counting  
+- Dynamic running count displayed on screen  
+
+---
+
+## Notes
+
+- Ace detection may be inconsistent in some frames.  
+- Designed specifically for **single-deck blackjack**; multi-deck counting logic is not implemented.  
+- Demo shows detection accuracy with cards: 5♠, 2♥, A♥, 10♥.
