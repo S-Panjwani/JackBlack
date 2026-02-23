@@ -53,16 +53,6 @@ So the deck is statistically neutral at this moment.
 
 ---
 
-## Features
-
-- Real-time card detection and classification  
-- Bounding boxes and labels drawn on detected cards  
-- Hi-Lo running count system for single-deck blackjack  
-- Duplicate detection filtering to prevent double-counting  
-- Dynamic running count displayed on screen  
-
----
-
 ## Notes
 
 - Ace detection may be inconsistent in some frames.  
